@@ -4,7 +4,7 @@ n = length(x);
 m = n-1;
 suma = 0;
 for i= 1:m
-    suma = suma + sin(x(1)+x(i)^2-1)+.5*(sin(x(n)^2));
+    suma = suma + sin(x(1)+x(i)^2-1);
 end
 
-fx = suma;
+fx = suma+.5*(sin(x(n)^2));

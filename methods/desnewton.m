@@ -1,8 +1,8 @@
-function [xf, j] = desnewton(fname, x)
+function [xf,MG, j] = desnewton(fname, x)
 % Newton's direction descent method for finding a local minimum.
 
 %% PARAMS
-tolerance = 1e-05; % tolerance for the norm of the gradient
+tolerance = 1e-012; % tolerance for the norm of the gradient
 maxIterations = 15;
 c1 = 0.1;           % Constante utilizada para la búsqueda de línea.
 maxLineSearchIterations = 10;
@@ -10,6 +10,7 @@ maxLineSearchIterations = 10;
 %% Initial vars
 
 gradient = gradiente(fname,x); % calculate the gradient of the function at x
+MG = norm(gradient);
 functionValue = feval(fname,x); % calculate the value of the function at x
 j = 0; % initialize iteration counter
 n = length(x);             % dimension of the input vector
@@ -62,6 +63,7 @@ while (norm(gradient) > tolerance && j < maxIterations)
     x = x + alpha * direction;
     functionValue = feval(fname, x);
     gradient = gradiente(fname, x); % calculate the gradient of the function at x
+    MG = [ MG ; norm(gradient)];
     j = j + 1; % increment iteration counter
 
     %% print iteration information

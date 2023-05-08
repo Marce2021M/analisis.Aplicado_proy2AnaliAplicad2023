@@ -71,7 +71,7 @@ ngD = norm(gD);
 semilogy([1:length(MGD)], MGD, 'rd', [1:length(MGD)], MGD, 'b', 'Linewidth', 3)
 title('Convergencia de DFP', 'Fontsize',20)
 xlabel('Número de iteraciones', 'Fontsize',20);
-ylabel('||g||', 'Fontsize',20);  
+ylabel('||g||', 'Fontsize',20);
 %% GRÁFICA BFGS
 semilogy([1:length(MGB)], MGB, 'rd', [1:length(MGB)], MGB, 'b', 'Linewidth', 3)
 title('Convergencia de BFGS', 'Fontsize',20)

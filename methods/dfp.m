@@ -1,20 +1,20 @@
 function [ xf, MG, j ] = dfp(fname, x)
 % 
 
-tol = 1e-05;  % tolerancia a la norma del gradiente
-jmax = 50;   % número máximo de iteraciones
+tol = 1e-06;  % tolerancia a la norma del gradiente
+jmax = 100;   % número máximo de iteraciones
 c1 = 0.0001;     % parámetro para np dar pasos grandes
 kmax = 10;     % número  máximo de pasos hacia atrás
 
 g = gradiente(fname,x);  fx = feval(fname,x);
 MG = norm(g);
 n = length(x);
-A = (1/norm(g))*eye(n);
+A = eye(n);
 j = 0;
-while (norm(g) > tol && j < jmax )
-    p = -A*g;    % dirección de descenso
+while (norm(g) > tol && j < jmax)
+    %p = -A*g;    % dirección de descenso
     %checar
-    %p = pcg(A,-g);
+    p = pcg(A,-g);
 
     % búsqueda de línea
     alfa = 1.0;
@@ -42,9 +42,8 @@ while (norm(g) > tol && j < jmax )
         gamma = 1/(trial);
         %checar
         C = eye(n) - gamma*(y*s');
-        A = C'*A*C+gamma*(s*s');
-        %C = eye(n) - gamma*(y*s');
-        %A = C*A*C'+gamma*(y*y');
+        %A = C'*A*C+gamma*(s*s');
+        A = C*A*C'+gamma*(y*y');
     else
         A = eye(n);
     end
